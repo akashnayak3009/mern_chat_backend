@@ -50,9 +50,17 @@ const io = new Server(server, {
 
 io.on("connection", (socket) => {
     console.log("connected to socket.io".red.bold.italic);
+
     socket.on("setup", (userData) => {
         socket.join(userData._id);
         console.log(userData._id);
         socket.emit("connected");
     });
+
+    
+    socket.on("join chat", (room) => {
+    socket.join(room);
+    console.log("User Joined Room: " + room);
+  });
+
 });
